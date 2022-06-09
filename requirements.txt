@@ -1,3 +1,5 @@
-from tarfile import PAX_NAME_FIELDS
-
 pandas
+matplotlib
+plotly
+requests
+ta

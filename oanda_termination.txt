@@ -1,0 +1,6 @@
+timeframes
+
+daily = D
+4 hour = H4
+1 hour = H1
+30 min = M30

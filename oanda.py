@@ -41,24 +41,24 @@ class OandaAPI():
         return response.status_code, response.json()
 
 
-if __name__ == "__main__":
-    api = OandaAPI()
+# if __name__ == "__main__":
+#     api = OandaAPI()
 
-    historical_data = api.fetch_candles('EUR_USD', 5, 'H4')
+#     historical_data = api.fetch_candles('EUR_USD', 5, 'H4')
 
-    #candles = historical_data[1]['candles']
+#     #candles = historical_data[1]['candles']
 
-    #instrument = historical_data[1]['instrument']
-    print(historical_data[1])
+#     #instrument = historical_data[1]['instrument']
+#     print(historical_data[1])
     
-    #this for loops loops through all of the candle in the historical data
-    for data_point in historical_data[1]['candles']:
+#     #this for loops loops through all of the candle in the historical data
+#     for data_point in historical_data[1]['candles']:
 
-        #the data of the candlestick
-        #date = data_point['time']
+#         #the data of the candlestick
+#         #date = data_point['time']
 
-        #the bid of the candlestick
-        #bid = data_point['bid']
+#         #the bid of the candlestick
+#         #bid = data_point['bid']
 
-        print(data_point)
-    #api.save_instruments()
+#         print(data_point)
+#     #api.save_instruments()
