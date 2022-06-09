@@ -1,6 +1,8 @@
 #local imports
+from harmonic_patterns import HarmonicPattern
 from oanda import OandaAPI
 from technical_analysis import TechnicalAnalysis
+from harmonic_patterns import HarmonicPattern
 
 #packages import
 import plotly.graph_objects as go
@@ -65,32 +67,39 @@ fig = go.Figure(data=[go.Candlestick(x=df['date'],
 fig.show()
 
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-# 3) technical analysis : RSI
+# # 3) technical analysis : RSI
 
-#next we want to calculate the rsi and plot it aswell, first we need to convert the dataframe to a close dataframe
-close_df = df['close']
-print(close_df)
+# #next we want to calculate the rsi and plot it aswell, first we need to convert the dataframe to a close dataframe
+# close_df = df['close']
+# print(close_df)
 
-#ta class instance
-ta = TechnicalAnalysis()
+# #ta class instance
+# ta = TechnicalAnalysis()
 
-#we pass the dataframe to the rsi method
-df['rsi'] = ta.rsi(close_df)
+# #we pass the dataframe to the rsi method
+# df['rsi'] = ta.rsi(close_df)
 
-#we plot the rsi
-plt.plot(df['date'], df['rsi'])
+# #we plot the rsi
+# plt.plot(df['date'], df['rsi'])
 
-#we show the plot
-plt.show()
+# #we show the plot
+# plt.show()
 
 
-# 3) technical analysis : stoch rsi
+# # 3) technical analysis : stoch rsi
 
-#we pass the dataframe to the rsi method
-df['stoch_rsi'] = ta.stoch_rsi(close_df)
+# #we pass the dataframe to the rsi method
+# df['stoch_rsi'] = ta.stoch_rsi(close_df)
 
-#we plot the rsi
-plt.plot(df['date'], df['stoch_rsi'])
+# #we plot the rsi
+# plt.plot(df['date'], df['stoch_rsi'])
 
-#we show the plot
-plt.show()
+# #we show the plot
+# plt.show()
+
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# # 4) technical analysis : harmonic patterns
+
+harmonic = HarmonicPattern(df)
+
+harmonic.find_pivot_points()
