@@ -3,6 +3,7 @@ from harmonic_patterns import HarmonicPattern
 from oanda import OandaAPI
 from technical_analysis import TechnicalAnalysis
 from harmonic_patterns import HarmonicPattern
+from maxima_testing import maxima
 
 #packages import
 import plotly.graph_objects as go
@@ -100,6 +101,8 @@ fig.show()
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 # # 4) technical analysis : harmonic patterns
 
-harmonic = HarmonicPattern(df)
+# harmonic = HarmonicPattern(df)
 
-harmonic.find_pivot_points()
+# harmonic.find_pivot_points()
+
+maxima(df)
