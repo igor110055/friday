@@ -5,6 +5,9 @@ import pandas as pd
 import matplotlib.pyplot as plt
 from scipy.signal import argrelextrema
 
+#local imports
+import config
+
 
 #this file will be used to find harmonic patterns
 class HarmonicPattern():
@@ -93,6 +96,7 @@ class HarmonicPattern():
         }
         
         print(self.xabcd_points)
+
 
     #this method is used to find the next 4 points
     def find_and_identify_next_4_points(self):
@@ -204,6 +208,14 @@ class HarmonicPattern():
         # the last retracement is just calculating the retracement from xa to ad
         self.xd_retracement = abs(self.ad / self.xa)
 
+
+    #this method is used to match the xabcd retracements to the the textbook retracements in the config and see if there is match
     def match_xabcd_retracements_to_harmonic_patterns(self):
 
-        
+        #we start by looping through the harmonic patterns inside of the available ones in config
+        for pattern in config.harmonic_patterns:
+
+            pass
+
+            #yoyooyoyoyo looking good man, just loop through the different retracmeents possible in the harmonic pattern dict (make sure to differentiate float and list values)
+            # then you are going to match them with the harmonic retracements library (make sure to add the error rate interval)
