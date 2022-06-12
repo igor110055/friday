@@ -180,3 +180,30 @@ class HarmonicPattern():
 
         #finally we return the data to the method that called it
         return new_extremum_type, new_extremum_value, new_extremum_index
+
+
+    #this method is used to calculate all of the useful retracements we will need to calculate the harmonic patterns
+    def calculate_xabcd_retracements(self):
+
+        #we calculate all of the segments
+        self.xa = abs(self.xabcd_points['a']['extremum_value'] - self.abcd_points['x']['extremum_value'])
+        self.ab = abs(self.xabcd_points['b']['extremum_value'] - self.abcd_points['a']['extremum_value'])
+        self.bc = abs(self.xabcd_points['c']['extremum_value'] - self.abcd_points['b']['extremum_value'])
+        self.cd = abs(self.xabcd_points['d']['extremum_value'] - self.abcd_points['c']['extremum_value'])
+        self.ad = abs(self.xabcd_points['d']['extremum_value'] - self.abcd_points['a']['extremum_value'])
+
+        #xb retracement
+        self.xb_retracement = abs(self.ab / self.xa)
+
+        #ac retracement calculation
+        self.ac_retracement = abs(self.bc / self.ab)
+
+        #bd retracement
+        self.bd_retracement = abs(self.cd / self.bc)
+
+        # the last retracement is just calculating the retracement from xa to ad
+        self.xd_retracement = abs(self.ad / self.xa)
+
+    def match_xabcd_retracements_to_harmonic_patterns(self):
+
+        
