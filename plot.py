@@ -64,8 +64,8 @@ fig = go.Figure(data=[go.Candlestick(x=df['date'],
                 low=df['low'],
                 close=df['close'])])
 
-#we show the plot
-fig.show()
+#we show the plot ##
+#fig.show()
 
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 # # 3) technical analysis : RSI
@@ -101,8 +101,10 @@ fig.show()
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 # # 4) technical analysis : harmonic patterns
 
-# harmonic = HarmonicPattern(df)
+harmonic = HarmonicPattern(df)
 
-# harmonic.find_pivot_points()
+harmonic.find_pivot_points()
 
-maxima(df)
+harmonic.find_and_identify_first_extremum()
+
+harmonic.find_and_identify_next_4_points()
