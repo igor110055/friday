@@ -3,7 +3,6 @@ from harmonic_patterns import HarmonicPattern
 from oanda import OandaAPI
 from technical_analysis import TechnicalAnalysis
 from harmonic_patterns import HarmonicPattern
-from maxima_testing import maxima
 
 #packages import
 import plotly.graph_objects as go
@@ -23,17 +22,8 @@ class Plot():
 
     def plot(self, df):
 
-
-        # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-        # 1) retrieving historical data
-
-
         # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
         # 2) plotting the data as candlestick data
-
-        #we convert the list to a dataframe to be used by pandas
-        df = pd.DataFrame(data = historical_data_list, columns = ['date', 'open', 'close', 'high', 'low'])
-        #print(df)
 
         #we plot the candlestick graph
         fig = go.Figure(data=[go.Candlestick(x=df['date'],
@@ -43,7 +33,7 @@ class Plot():
                         close=df['close'])])
 
         #we show the plot ##
-        #fig.show()
+        fig.show()
 
         # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
         # # 3) technical analysis : RSI
@@ -74,14 +64,14 @@ class Plot():
         # plt.plot(df['date'], df['stoch_rsi'])
 
         # #we show the plot
-        # plt.show()
+        #plt.show()
 
         # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
         # # 4) technical analysis : harmonic patterns
 
         harmonic = HarmonicPattern(df)
 
-        harmonic.find_pivot_points()
+        harmonic.find_extremum_points()
 
         harmonic.find_and_identify_first_extremum()
 

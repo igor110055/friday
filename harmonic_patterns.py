@@ -17,7 +17,7 @@ class HarmonicPattern():
         #we declare our dataframe to be used throughout the class
         self.df = df
         
-    def find_pivot_points(self):
+    def find_extremum_points(self):
         
         n = 5  # number of points to be checked before and after
 
@@ -31,7 +31,7 @@ class HarmonicPattern():
         plt.scatter(self.df.index, self.df['min'], c='r')
         plt.scatter(self.df.index, self.df['max'], c='g')
         plt.plot(self.df.index, self.df['close'])
-        #plt.show()
+        plt.show()
     
 
     #this method is used to find the first low or high of a dataframe, it will also identify if it is a low or high
@@ -208,14 +208,46 @@ class HarmonicPattern():
         # the last retracement is just calculating the retracement from xa to ad
         self.xd_retracement = abs(self.ad / self.xa)
 
+        #we store everything inside of the xabcd dictionary
+        self.xabcd['retracements']['xb'] = self.xb_retracement
+        self.xabcd['retracements']['ac'] = self.ac_retracement
+        self.xabcd['retracements']['bd'] = self.bd_retracement
+        self.xabcd['retracements']['xd'] = self.xd_retracement
 
-    #this method is used to match the xabcd retracements to the the textbook retracements in the config and see if there is match
+
+    # this method is used to match the xabcd retracements to the the textbook retracements in the config and see if there is match
     def match_xabcd_retracements_to_harmonic_patterns(self):
 
         #we start by looping through the harmonic patterns inside of the available ones in config
         for pattern in config.harmonic_patterns:
 
-            pass
+            #we have a counter that will count the number of retracements that are correct, if this number goes up to 4, it means a harmonic pattern has been found
+            retracement_counter = 0
+            
+            #we double loop to get the retracement inside of each pattern
+            for retracement in pattern:
+                
+                # in each retracement we check if the type is a float, if it is we just treat it as a single variable, otherwise we will 
+                # check both intervals possible
+                if type(pattern[retracement]) == float:
+                    
+                    #we check if the retracement matches the harmonic textbook retracement
+                    if pattern[retracement] * (1-config.error_rate) <= self.xabcd['retracements'][retracement] <= pattern[retracement] * (1 + config.error_rate):
+                        retracement_counter += 1
+                    
+                # if there are multiple retracement choices for the harmonic patterns, we loop through them
+                if type(pattern[retracement]) == list:
 
-            #yoyooyoyoyo looking good man, just loop through the different retracmeents possible in the harmonic pattern dict (make sure to differentiate float and list values)
+                    #we check if the retracement matches the harmonic textbook retracement, by comparing it to the lowest interval and the highest interval
+                    if pattern[retracement][0] * (1-config.error_rate) <= self.xabcd['retracements'][retracement] <= pattern[retracement][1] * (1 + config.error_rate):
+                        retracement_counter += 1
+
+            #if the counter is equal to 4, it means that there is a match on the xabcd points and the harmonic pattern
+            if retracement_counter == 4:
+                return True
+            
+            #otherwise, if there is no match we return a false boolean
+            return False
+
+            # yoyooyoyoyo looking good man, just loop through the different retracmeents possible in the harmonic pattern dict (make sure to differentiate float and list values)
             # then you are going to match them with the harmonic retracements library (make sure to add the error rate interval)

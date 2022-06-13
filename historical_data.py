@@ -12,7 +12,8 @@ class HistoricalData():
     def __init__(self):
         pass
 
-    def retrieve_forex_historical_data(instrument, data_points, timeframe):
+    def retrieve_forex_historical_data(self, instrument, data_points, timeframe):
+
         #oanda api class instance for retrieving historical data
         api = OandaAPI()
 
@@ -26,7 +27,7 @@ class HistoricalData():
         #instrument = historical_data[1]['instrument']
 
         #we initiate an empty list to put the data inside
-        historical_data_list= []
+        historical_data_list = []
 
         #we retrieve the data by looping through every candle in the historical data
         for data_point in historical_data[1]['candles']:

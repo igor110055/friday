@@ -1,6 +1,6 @@
 import requests
 import pandas as pd
-import defs
+import config
 import utils
 
 
@@ -10,10 +10,10 @@ class OandaAPI():
         self.session = requests.Session()    
 
     def fetch_instruments(self):
-        url = f"{defs.OANDA_URL}/accounts/{defs.ACCOUNT_ID}/instruments"
-        response = self.session.get(url, params=None, headers=defs.SECURE_HEADER)
+        url = f"{config.OANDA_URL}/accounts/{config.ACCOUNT_ID}/instruments"
+        response = self.session.get(url, params=None, headers=config.SECURE_HEADER)
         return response.status_code, response.json()
-    
+
     def get_instruments_df(self):
         code, data = self.fetch_instruments()
         if code == 200:
@@ -28,7 +28,7 @@ class OandaAPI():
             df.to_pickle(utils.get_instruments_data_filename())
 
     def fetch_candles(self, pair_name, count, granularity):
-        url = f"{defs.OANDA_URL}/instruments/{pair_name}/candles"
+        url = f"{config.OANDA_URL}/instruments/{pair_name}/candles"
 
         params = dict(
             count = count,
@@ -36,7 +36,7 @@ class OandaAPI():
             price = "MBA"
         )
 
-        response = self.session.get(url, params=params, headers=defs.SECURE_HEADER)
+        response = self.session.get(url, params=params, headers=config.SECURE_HEADER)
 
         return response.status_code, response.json()
 
