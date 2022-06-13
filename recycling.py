@@ -49,3 +49,37 @@ for i in range(order, len(list) - order):
 #
 #
 #
+
+#harmonic patterns before switching to the intervals
+# this method is used to match the xabcd retracements to the the textbook retracements in the config and see if there is match
+def match_xabcd_retracements_to_harmonic_patterns(self):
+
+    #we start by looping through the harmonic patterns inside of the available ones in config
+    for pattern in config.harmonic_patterns:
+
+        #we have a counter that will count the number of retracements that are correct, if this number goes up to 4, it means a harmonic pattern has been found
+        retracement_counter = 0
+        
+        #we double loop to get the retracement inside of each pattern
+        for retracement in pattern:
+            
+            # in each retracement we check if the type is a float, if it is we just treat it as a single variable, otherwise we will 
+            # loop through the values inside and check all the iterations
+            if type(pattern[retracement]) == float:
+                
+                #we check if the retracement matches the harmonic textbook retracement
+                if pattern[retracement] * (1-config.error_rate) <= self.xabcd['retracements'][retracement] <= pattern[retracement] * (1 + config.error_rate):
+                    retracement_counter += 1
+                
+            # if there are multiple retracement choices for the harmonic patterns, we loop through them
+            if type(pattern[retracement]) == list:
+
+                #we loop through the different retracement choices
+                for retracement_2 in pattern[retracement]:
+
+                    #we check if the retracement matches the harmonic textbook retracement
+                    if pattern[retracement_2] * (1-config.error_rate) <= self.xabcd['retracements'][retracement_2] <= pattern[retracement_2] * (1 + config.error_rate):
+                        retracement_counter += 1
+
+        #if the counter is equal to 4, it means that there is a match on the xabcd points and the harmonic pattern
+        if retracement_counter == 4:
