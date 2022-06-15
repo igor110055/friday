@@ -2,10 +2,12 @@
 from historical_data import HistoricalData
 from plot import Plot
 from harmonic_patterns import HarmonicPattern
+from disk import Disk
 
 #class instances
 historical_data = HistoricalData()
 plot = Plot()
+disk = Disk()
 
 #instrument
 instrument = 'USD_CAD'
@@ -43,5 +45,13 @@ if harmonic.match_xabcd_retracements_to_harmonic_patterns() == True:
 else:
     pass
     #continue
+
+# now we are going to loop throught the remaining points, feeding the programs points as if it was reading it live
+
+# we find the last index of the last point
+xabcd = disk.load('xabcd')
+
+
+
 
 

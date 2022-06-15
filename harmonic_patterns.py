@@ -7,6 +7,7 @@ from scipy.signal import argrelextrema
 
 #local imports
 import config
+from disk import Disk
 
 
 #this file will be used to find harmonic patterns
@@ -16,7 +17,12 @@ class HarmonicPattern():
 
         #we declare our dataframe to be used throughout the class
         self.df = df
+
+        #class instances
+        self.disk = Disk()
         
+    
+    #this method takes into input a dataframe and returns the maxima and minima
     def find_extremum_points(self):
         
         n = 5  # number of points to be checked before and after
@@ -213,6 +219,9 @@ class HarmonicPattern():
         self.xabcd['retracements']['ac'] = self.ac_retracement
         self.xabcd['retracements']['bd'] = self.bd_retracement
         self.xabcd['retracements']['xd'] = self.xd_retracement
+
+        #we save the xabcd dictionary to the disk
+        self.disk.save(filename = 'xabcd', obj = self.xabcd)
 
 
     # this method is used to match the xabcd retracements to the the textbook retracements in the config and see if there is match
