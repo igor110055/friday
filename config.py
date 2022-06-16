@@ -17,8 +17,7 @@ minimum_pattern_lenght = 20
 
 maximum_pattern_lenght = 160
 
-error_rate = 0.03
-
+error_rate = 0.2
 
 harmonic_patterns = {
     'crab': {
@@ -44,5 +43,14 @@ harmonic_patterns = {
         'ac': [0.382, 0.886],
         'bd': [1.27, 1.618],
         'xd': 0.786
+    }
+}
+
+black_swan = {
+    'black_swan': {
+        'xb': [1.382, 2.618],
+        'ac': [0.236, 0.5],
+        'bc': [1.128, 2],
+        'xd': [1.128, ]
     }
 }

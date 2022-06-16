@@ -4,14 +4,16 @@ import traceback
 
 #local imports
 import config
-from telegram_notificator import TelegramNotificator
+#from telegram_notificator import TelegramNotificator
 
 #class Disk(metaclass=singleton.Singleton):
 class Disk():
     def __init__(self):
 
         #logging object
-        self.telegram_notificator = TelegramNotificator()
+        #self.telegram_notificator = TelegramNotificator()
+
+        pass
 
 
     #this method saves an inputted object into the disk, using the file name provided, it will overwrite the current file

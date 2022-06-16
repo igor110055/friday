@@ -11,11 +11,11 @@ disk = Disk()
 
 #instrument
 instrument = 'USD_CAD'
-data_points = 1000
+data_points = 20
 timeframe = 'D'
 
 #we start by retrieving the historical data we will need
-df = historical_data.retrieve_forex_historical_data(instrument, data_points, timeframe)
+df = historical_data.retrieve_forex_historical_data_converted(instrument, data_points, timeframe)
 
 #we plot the data
 plot.plot(df)
@@ -49,7 +49,7 @@ else:
 # now we are going to loop throught the remaining points, feeding the programs points as if it was reading it live
 
 # we find the last index of the last point
-xabcd = disk.load('xabcd')
+#xabcd = disk.load('xabcd')
 
 
 
