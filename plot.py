@@ -84,11 +84,11 @@ class Plot():
         #first we need to plot the dataframe
         
         #we plot the xabcd points
-        plt.scatter(xabcd['index']['x'] -1, xabcd['coords']['x'], c='r')
-        plt.scatter(xabcd['index']['a'] -1, xabcd['coords']['a'], c='r')
-        plt.scatter(xabcd['index']['b'] -1, xabcd['coords']['b'], c='r')
-        plt.scatter(xabcd['index']['c'] -1, xabcd['coords']['c'], c='r')
-        plt.scatter(xabcd['index']['d'] -1, xabcd['coords']['d'], c='r')
+        plt.scatter(xabcd['index']['x'], xabcd['coords']['x'], c='r')
+        plt.scatter(xabcd['index']['a'], xabcd['coords']['a'], c='r')
+        plt.scatter(xabcd['index']['b'], xabcd['coords']['b'], c='r')
+        plt.scatter(xabcd['index']['c'], xabcd['coords']['c'], c='r')
+        plt.scatter(xabcd['index']['d'], xabcd['coords']['d'], c='r')
 
         #we add a comment to show the harmonic pattern
         plt.figtext(.8, .8, "T = 4K")

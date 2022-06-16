@@ -17,7 +17,7 @@ minimum_pattern_lenght = 20
 
 maximum_pattern_lenght = 160
 
-error_rate = 0.2
+error_rate = 0.03
 
 harmonic_patterns = {
     'crab': {
