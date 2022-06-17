@@ -30,9 +30,9 @@ class HarmonicPattern():
     def main(self):
 
         # Find local peaks
-        self.df['min'] = self.df.iloc[argrelextrema(self.df.close.values, np.less_equal,
+        self.df['min'] = self.df.iloc[argrelextrema(self.df.low.values, np.less_equal,
                             order = self.order)[0]]['low']
-        self.df['max'] = self.df.iloc[argrelextrema(self.df.close.values, np.greater_equal, 
+        self.df['max'] = self.df.iloc[argrelextrema(self.df.high.values, np.greater_equal, 
                             order = self.order)[0]]['high']
 
         #print(self.df)
@@ -102,8 +102,14 @@ class HarmonicPattern():
                             if float(value_3) > float(value_2):
                                 continue
 
+                        #second constraint: we check that the points in between extrema 2 and 3 are not higher than the biggest extrema
+                        if self.constraint_extrema(value_1 = value_1, value_2 = value_3, index_1 = index_extrema_1, index_2 = index_extrema_3, type = extrema) == False:
+                            #we skip to the next iteration if this constraint is not respected
+                            continue
+
                         #~~~~~~~~~~
                         # we also need to check that there are not points that are higher or lower than each other in between
+                        #self.check_points_in_between(self.value_1, self.value_2, self.index_1, self.index_2)
 
                         #second min info
                         #print(f'the {extrema} extrema is {value_3} with index {index_extrema_3}')
@@ -134,6 +140,11 @@ class HarmonicPattern():
                                     #if it is not we are going to continue to the next iteration
                                     continue
 
+                            #second constraint: we check that the points in between anti_extrema 1 and 2 are not higher than the biggest extrema
+                            if self.constraint_extrema(value_1 = value_2, value_2 = value_4, index_1 = index_extrema_2, index_2 = index_extrema_4, type = anti_extrema) == False:
+                                #we skip to the next iteration if this constraint is not respected
+                                continue
+
                             #print(f'the {anti_extrema} extrema is {value_4} with index {index_extrema_4}')
 
                             self.xabcd['coords']['c'] = value_4 
@@ -161,6 +172,11 @@ class HarmonicPattern():
                                         #if it is not we are going to continue to the next iteration
                                         continue
 
+                                #second constraint: we check that the points in between extrema 2 and 3 are not higher than the biggest extrema
+                                if self.constraint_extrema(value_1 = value_3, value_2 = value_5, index_1 = index_extrema_3, index_2 = index_extrema_5, type = extrema) == False:
+                                    #we skip to the next iteration if this constraint is not respected
+                                    continue
+
                                 #third mimimum info
                                 value_5 = self.df[extrema][index_extrema_5]
                                 #print(f'the {extrema} extrema is {value_5} with index {index_extrema_5}')
@@ -177,7 +193,7 @@ class HarmonicPattern():
                                 #and we also want to check if there is a match on the xabcd  to harmonic pattern
                                 if self.match_xabcd_retracements_to_harmonic_patterns() == True:
                                     print(self.xabcd)
-                                    self.plot.harmonic_pattern(self.df, self.xabcd)
+                                    self.plot.harmonic_pattern(self.df, self.xabcd, self.harmonic_pattern_matched)
 
 
     #this method bumps the points up and frees the last point
@@ -290,23 +306,52 @@ class HarmonicPattern():
 
             #if the counter is equal to 4, it means that there is a match on the xabcd points and the harmonic pattern
             if retracement_counter == 4:
+
+                #we save the harmonic pattern config for when we need to plot it
+                self.harmonic_pattern_matched = pattern
+
+                #we return true to the method that called it
                 return True
             
         #otherwise, if there is no match we return a false boolean
         return False
 
 
-# historical_data = HistoricalData()
-# df = historical_data = historical_data.retrieve_forex_historical_data_converted('USD_CAD', 1000, 'D')
+    #this method is used as a constraint to make sure that the points chosen dont have other highs or lows in between them
+    def constraint_extrema(self, value_1, value_2, index_1, index_2, type):
 
-# harmonic = HarmonicPattern(df, 5)
-# harmonic.main()
+        # if both points are lows then we need to first find which one is the lowest point
+        if type == 'min':
 
-# # harmonic = HarmonicPattern(df, 90)
-# # harmonic.main()
+            #we note down the highest value
+            lowest_point = min(float(value_1), float(value_2))
 
-# # harmonic = HarmonicPattern(df, 100)
-# # harmonic.main()
+            #now we need to check that there are no points below the lowest point 
+
+            #we loop through each point between both points and check that there are no values below the lowest point recorded earlier
+            for index in range(index_1 + 1, index_2 - 1):
+
+                if float(self.df['low'][index]) < float(lowest_point):
+                    return False
+
+            return True
+
+        # if both points are highs then we need to first find which one is the highest point
+        if type == 'max':
+
+            #we note down the highest value
+            highest_point = max(float(value_1), float(value_2))
+
+            #now we need to check that there are no points above the highest point
+
+            #we loop through each point between both points and check that there are no values below the highest point recorded earlier
+            for index in range(index_1 + 1, index_2 - 1):
+
+                if float(self.df['high'][index]) > float(highest_point):
+                    return False
+
+            return True
+
 
 
 '''
@@ -446,12 +491,12 @@ for extrema in extremums:
             break
         break
 '''
-instrument = 'EUR_GBP'
-data_point = 160
+# instrument = 'USD_JPY'
+# data_point = 160
 
-print(f' isntrument is {instrument} and data point is {data_point}')
-historical_data = HistoricalData()
-df = historical_data.retrieve_forex_historical_data_converted(instrument, data_point, 'D')
+# print(f' isntrument is {instrument} and data point is {data_point}')
+# historical_data = HistoricalData()
+# df = historical_data.retrieve_forex_historical_data_converted(instrument, data_point, 'D')
 
-harmonic_pattern = HarmonicPattern(df, 5)
-harmonic_pattern.main()
+# harmonic_pattern = HarmonicPattern(df, 5)
+# harmonic_pattern.main()

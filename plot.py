@@ -79,19 +79,48 @@ class Plot():
 
 
     #this method is used to plot a graph that has an xabcd pattern, it will plot the dataframe and also highlight and connect the xabcd points
-    def harmonic_pattern(self, df, xabcd):
+    def harmonic_pattern(self, df, xabcd, harmonic_pattern):
 
-        #first we need to plot the dataframe
-        
-        #we plot the xabcd points
-        plt.scatter(xabcd['index']['x'], xabcd['coords']['x'], c='r')
-        plt.scatter(xabcd['index']['a'], xabcd['coords']['a'], c='r')
-        plt.scatter(xabcd['index']['b'], xabcd['coords']['b'], c='r')
-        plt.scatter(xabcd['index']['c'], xabcd['coords']['c'], c='r')
-        plt.scatter(xabcd['index']['d'], xabcd['coords']['d'], c='r')
+        #we plot the harmonic points
+        x_points = [
+            xabcd['index']['x'],
+            xabcd['index']['a'],
+            xabcd['index']['b'],
+            xabcd['index']['c'],
+            xabcd['index']['d']
+        ]
+
+        y_points = [
+            xabcd['coords']['x'],
+            xabcd['coords']['a'],
+            xabcd['coords']['b'],
+            xabcd['coords']['c'],
+            xabcd['coords']['d']
+        ]
+
+        #plt.scatter(x_points, y_points, c='r')
+        plt.plot(x_points, y_points, 'ro-')
+       
 
         #we add a comment to show the harmonic pattern
-        plt.figtext(.8, .8, "T = 4K")
+        plt.figtext(.8, .8, harmonic_pattern)
+
+
+        #we plot the retracements of the harmonic points
+        x_retracements = [
+            xabcd['index']['x'],
+            xabcd['index']['b'],
+            xabcd['index']['d']
+        ]
+
+        y_retracements = [
+            xabcd['coords']['x'],
+            xabcd['coords']['b'],
+            xabcd['coords']['d']
+        ]
+
+        plt.plot(x_retracements, y_retracements, 'ro-')
+
 
         #we plot the partial dataframe
         plt.plot(df.index, df['close'])

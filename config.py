@@ -1,4 +1,7 @@
 #oanda api config
+from sunau import AUDIO_FILE_ENCODING_ADPCM_G721
+
+
 API_KEY = "647d614e645f5e9baf91dc73fc596580-a5bb88b608640df41b0d857ad569acd8"
 ACCOUNT_ID = "101-002-22473635-001"
 OANDA_URL = 'https://api-fxpractice.oanda.com/v3'
@@ -18,6 +21,37 @@ minimum_pattern_lenght = 20
 maximum_pattern_lenght = 160
 
 error_rate = 0.03
+
+# ticker to trade
+instruments = [
+    'AUD_CAD',
+    'AUD_CHF',
+    'AUD_JPY',
+    'AUD_NZD',
+    'AUD_USD',
+    'CAD_JPY',
+    'CAD_CHF',
+    'CHF_JPY',
+    'EUR_AUD',
+    'EUR_CAD',
+    'EUR_CHF',
+    'EUR_GBP',
+    'EUR_NZD',
+    'EUR_JPY',
+    'EUR_USD',
+    'GBP_AUD',
+    'GBP_CAD',
+    'GBP_CHF',
+    'GBP_JPY',
+    'GBP_NZD',
+    'GBP_USD',
+    'NZD_CAD',
+    'NZD_CHF',
+    'NZD_JPY',
+    'NZD_USD',
+    'USD_CAD',
+    'USD_CHF'
+]
 
 harmonic_patterns = {
     'crab': {
